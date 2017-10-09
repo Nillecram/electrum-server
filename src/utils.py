@@ -135,7 +135,7 @@ def hash_160_to_script_address(h160):
     return hash_160_to_address(h160, SCRIPT_ADDRESS)
 
 
-def hash_160_to_address(h160, addrtype = 0):
+def hash_160_to_address(h160, addrtype = 63):
     """ Checks if the provided hash is actually 160bits or 20 bytes long and returns the address, else None
     """
     if h160 is None or len(h160) is not 20:
@@ -166,7 +166,7 @@ def b58encode(v):
         long_value = div
     result = __b58chars[long_value] + result
 
-    # Bitcoin does a little leading-zero-compression:
+    # SHIELD does a little leading-zero-compression:
     # leading 0-bytes in the input become leading-1s
     nPad = 0
     for c in v:
