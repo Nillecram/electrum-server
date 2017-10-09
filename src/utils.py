@@ -26,14 +26,17 @@ import threading
 import time
 import hashlib
 import struct
+from calendar import timegm
+from time import strptime
+import scrypt
 
 __b58chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 __b58base = len(__b58chars)
 
 global PUBKEY_ADDRESS
 global SCRIPT_ADDRESS
-PUBKEY_ADDRESS = 0
-SCRIPT_ADDRESS = 5
+PUBKEY_ADDRESS = 63
+SCRIPT_ADDRESS = 33
 
 def rev_hex(s):
     return s.decode('hex')[::-1].encode('hex')
@@ -41,6 +44,7 @@ def rev_hex(s):
 
 Hash = lambda x: hashlib.sha256(hashlib.sha256(x).digest()).digest()
 
+HashScrypt = lambda x: scrypt.hash(x, x, 1024, 1, 1, 32)
 
 hash_encode = lambda x: x[::-1].encode('hex')
 
@@ -222,6 +226,8 @@ def DecodeBase58Check(psz):
         return key
 
 
+def timestamp_safe(t):
+    return t if isinstance(t, int) else timegm(strptime(t, "%Y-%m-%d %H:%M:%S %Z"))
 
 
 ########### end pywallet functions #######################
@@ -239,11 +245,15 @@ def timestr():
 import logging
 import logging.handlers
 
-logging.basicConfig(format="%(asctime)-11s %(message)s", datefmt="[%d/%m/%Y-%H:%M:%S]")
 logger = logging.getLogger('electrum')
 
-def init_logger():
+def init_logger(logfile):
+    hdlr = logging.handlers.WatchedFileHandler(logfile)
+    formatter = logging.Formatter('%(asctime)s %(message)s', "[%d/%m/%Y-%H:%M:%S]")
+    hdlr.setFormatter(formatter)
+    logger.addHandler(hdlr)
     logger.setLevel(logging.INFO)
+
 
 def print_log(*args):
     logger.info(" ".join(imap(str, args)))
