@@ -35,7 +35,7 @@ import deserialize
 from processor import Processor, print_log
 from storage import Storage
 from utils import logger, hash_decode, hash_encode, Hash, header_from_string, header_to_string, ProfiledThread, \
-    rev_hex, int_to_hex4
+    rev_hex, int_to_hex4, timestamp_safe, HashScrypt
 
 class BlockchainProcessor(Processor):
 
@@ -179,7 +179,7 @@ class BlockchainProcessor(Processor):
             "version": b.get('version'),
             "prev_block_hash": b.get('previousblockhash'),
             "merkle_root": b.get('merkleroot'),
-            "timestamp": b.get('time'),
+            "timestamp": timestamp_safe(b.get('time')),
             "bits": int(b.get('bits'), 16),
             "nonce": b.get('nonce'),
         }
@@ -231,7 +231,7 @@ class BlockchainProcessor(Processor):
 
     @staticmethod
     def hash_header(header):
-        return rev_hex(Hash(header_to_string(header).decode('hex')).encode('hex'))
+        return rev_hex(HashScrypt(header_to_string(header).decode('hex')).encode('hex'))
 
     def read_header(self, block_height):
         if os.path.exists(self.headers_filename):
