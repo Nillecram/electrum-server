@@ -26,15 +26,15 @@ path =
 # for each address, history will be pruned if it is longer than this limit
 pruning_limit = 100
 
-# cache sizes in bytes, the default is optimized for ~4 GB RAM setups to run SHIELDd alongside
+# cache sizes in bytes, the default is optimized for ~4 GB RAM setups to run GoByted alongside
 # If you have lots of RAM increase up to 16 times for best performance
 #hist_cache = 67108864
 #utxo_cache = 134217728
 #addr_cache = 16777216
 
-[SHIELDd]
-SHIELDd_host = localhost
-SHIELDd_port = 8332
-# user and password from SHIELD.conf (not needed for localhost)
-#SHIELDd_user =
-#SHIELDd_password =
+[GoByted]
+GoByted_host = localhost
+GoByted_port = 8332
+# user and password from GoByte.conf (not needed for localhost)
+#GoByted_user =
+#GoByted_password =

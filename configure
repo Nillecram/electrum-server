@@ -108,16 +108,16 @@ fi
 chown $user:$user $logfile
 
 
-SHIELDd_user=$(read_config "SHIELDd_user")
-if ! [ "$SHIELDd_user" ]; then
-    read -p "rpcuser (from your SHIELD.conf file, leave empty for localhost): " -r
-    write_config "SHIELDd_user" $REPLY
+GoByted_user=$(read_config "GoByted_user")
+if ! [ "$GoByted_user" ]; then
+    read -p "rpcuser (from your GoByte.conf file, leave empty for localhost): " -r
+    write_config "GoByted_user" $REPLY
 fi
 
-SHIELDd_password=$(read_config "SHIELDd_password")
-if ! [ "$SHIELDd_password" ]; then
-    read -p "rpcpassword (from your SHIELD.conf file, leave emtpy for localhost): " -r
-    write_config "SHIELDd_password" $REPLY
+GoByted_password=$(read_config "GoByted_password")
+if ! [ "$GoByted_password" ]; then
+    read -p "rpcpassword (from your GoByte.conf file, leave emtpy for localhost): " -r
+    write_config "GoByted_password" $REPLY
 fi
 
 
