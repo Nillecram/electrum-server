@@ -108,16 +108,16 @@ fi
 chown $user:$user $logfile
 
 
-SHIELDd_user=$(read_config "SHIELDd_user")
-if ! [ "$SHIELDd_user" ]; then
-    read -p "rpcuser (from your SHIELD.conf file, leave empty for localhost): " -r
-    write_config "SHIELDd_user" $REPLY
+xGOxd_user=$(read_config "xGOxd_user")
+if ! [ "$xGOxd_user" ]; then
+    read -p "rpcuser (from your xGOx.conf file, leave empty for localhost): " -r
+    write_config "xGOxd_user" $REPLY
 fi
 
-SHIELDd_password=$(read_config "SHIELDd_password")
-if ! [ "$SHIELDd_password" ]; then
-    read -p "rpcpassword (from your SHIELD.conf file, leave emtpy for localhost): " -r
-    write_config "SHIELDd_password" $REPLY
+xGOxd_password=$(read_config "xGOxd_password")
+if ! [ "$xGOxd_password" ]; then
+    read -p "rpcpassword (from your xGOx.conf file, leave emtpy for localhost): " -r
+    write_config "xGOxd_password" $REPLY
 fi
 
 

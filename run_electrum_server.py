@@ -114,7 +114,7 @@ def create_config(filename=None):
 
     # set network parameters
     config.add_section('network')
-    config.set('network', 'type', 'SHIELD_main')
+    config.set('network', 'type', 'xGOx_main')
 
     # try to find the config file in the default paths
     if not filename:

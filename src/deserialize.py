@@ -16,7 +16,7 @@ class SerializationError(Exception):
 
 
 class BCDataStream(object):
-    """Workalike python implementation of SHIELD's CDataStream class."""
+    """Workalike python implementation of xGOx's CDataStream class."""
     def __init__(self):
         self.input = None
         self.read_cursor = 0
@@ -46,7 +46,7 @@ class BCDataStream(object):
         # 0 to 252 :    1-byte-length followed by bytes (if any)
         # 253 to 65,535 : byte'253' 2-byte-length followed by bytes
         # 65,536 to 4,294,967,295 : byte '254' 4-byte-length followed by bytes
-        # ... and the SHIELD client is coded to understand:
+        # ... and the xGOx client is coded to understand:
         # greater than 4,294,967,295 : byte '255' 8-byte-length followed by bytes of string
         # ... but I don't think it actually handles any strings that big.
         if self.input is None:
@@ -197,12 +197,12 @@ class Enumeration:
         return self.reverseLookup[value]
 
 
-# This function comes from SHIELDtools, bct-LICENSE.txt.
+# This function comes from xGOxtools, bct-LICENSE.txt.
 def long_hex(bytes):
     return bytes.encode('hex_codec')
 
 
-# This function comes from SHIELDtools, bct-LICENSE.txt.
+# This function comes from xGOxtools, bct-LICENSE.txt.
 def short_hex(bytes):
     t = bytes.encode('hex_codec')
     if len(t) < 11:
@@ -233,7 +233,6 @@ def parse_Transaction(vds, is_coinbase):
     d = {}
     start = vds.read_cursor
     d['version'] = vds.read_int32()
-    d['time'] = vds.read_int32()
     n_vin = vds.read_compact_size()
     d['inputs'] = []
     for i in xrange(n_vin):
@@ -350,7 +349,7 @@ def get_address_from_output_script(bytes):
     if match_decoded(decoded, match):
         return None
 
-    # Pay-by-SHIELD-address TxOuts look like:
+    # Pay-by-xGOx-address TxOuts look like:
     # DUP HASH160 20 BYTES:... EQUALVERIFY CHECKSIG
     match = [opcodes.OP_DUP, opcodes.OP_HASH160, opcodes.OP_PUSHDATA4, opcodes.OP_EQUALVERIFY, opcodes.OP_CHECKSIG]
     if match_decoded(decoded, match):

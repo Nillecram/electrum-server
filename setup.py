@@ -21,10 +21,10 @@ setup(
         'electrumserver.ircthread',
         'electrumserver.stratum_tcp'
     ],
-    description="SHIELD Electrum Server",
+    description="xGOx Electrum Server",
     author="Thomas Voegtlin",
     author_email="thomasv@electrum.org",
     license="MIT Licence",
     url="https://github.com/spesmilo/electrum-server/",
-    long_description="""Server for the Electrum Lightweight SHIELD Wallet"""
+    long_description="""Server for the Electrum Lightweight xGOx Wallet"""
 )

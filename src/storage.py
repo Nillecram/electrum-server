@@ -41,7 +41,7 @@ Patricia tree for hashing unspents
 
 # increase this when database needs to be updated
 global GENESIS_HASH
-GENESIS_HASH = '000001bb4d8e1100fcb24e21b20b89bbe8e4843822fcca8fd14f2f124f8a381d'
+GENESIS_HASH = '000008eef0757069abb9455e104b18411a49bc2d6c351f0a7371e4599def8bc2'
 DB_VERSION = 3
 KEYLENGTH = 56   # 20 + 32 + 4
 
@@ -246,7 +246,7 @@ class Storage(object):
         print_log("UTXO tree root hash:", self.root_hash.encode('hex'))
         print_log("Coins in database:", coins)
 
-    # convert between SHIELD addresses and 20 bytes keys used for storage.
+    # convert between xGOx addresses and 20 bytes keys used for storage.
     @staticmethod
     def address_to_key(addr):
         return bc_address_to_hash_160(addr)
@@ -286,7 +286,7 @@ class Storage(object):
     def listunspent(self, addr):
         key = self.address_to_key(addr)
         if key is None:
-            raise BaseException('Invalid SHIELD address', addr)
+            raise BaseException('Invalid xGOx address', addr)
         out = []
         with self.db_utxo.lock:
             for k, v in self.db_utxo.db.iterator(start=key):
@@ -336,8 +336,8 @@ class Storage(object):
             print_log("no undo info for ", height)
         return eval(s)
 
-    def write_undo_info(self, height, SHIELDd_height, undo_info):
-        if height > SHIELDd_height - self.reorg_limit or self.test_reorgs:
+    def write_undo_info(self, height, xGOxd_height, undo_info):
+        if height > xGOxd_height - self.reorg_limit or self.test_reorgs:
             self.db_undo.put("undo_info_%d" % (height % self.reorg_limit), repr(undo_info))
 
     @staticmethod
