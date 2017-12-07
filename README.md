@@ -2,6 +2,7 @@ Electrum-server for the Electrum client
 =========================================
 
   * Author: Thomas Voegtlin (ThomasV on the xGOxtalk forum)
+  * xGOx migration: Nillecram
   * Language: Python
 
 
